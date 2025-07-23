@@ -1,0 +1,7 @@
+# deps
+contracts/lib
+contracts/ts-scripts/node_modules
+
+# build artifacts
+contracts/cache
+contracts/out
