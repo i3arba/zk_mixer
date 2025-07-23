@@ -22,7 +22,4 @@ fn main(
     //This `merkle_tree` is a module that we will create to handle Merkle tree operations
     let computed_root: Field = merkle_tree::compute_merkle_root(commitment, merkle_proof, is_even);
     assert(computed_root == root, "Merkle root does not match");
-
-    //This is required to ensure no one can front-run the transaction an steal the funds
-    let recipient_binding = recipient * recipient;
 }
