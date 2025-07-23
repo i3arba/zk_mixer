@@ -82,6 +82,26 @@ contract MixerTest is Test {
         assertEq(address(mixer).balance, 0);
     }
 
+    function testAnotherAddressSendProof() public {
+        // make a deposit
+        (bytes32 commitment, bytes32 nullifier, bytes32 secret) = _getCommitment();
+
+        vm.expectEmit();
+        emit Mixer.Mixer_Deposit(commitment, 0, block.timestamp);
+        mixer.deposit{value: mixer.DENOMINATION()}(commitment);
+
+        // create a proof
+        bytes32[] memory leaves = new bytes32[](1);
+        leaves[0] = commitment;
+        (bytes memory proof, bytes32[] memory publicInputs) = _getProof(nullifier, secret, recipient, leaves);
+
+        // make a withdrawal
+        address attacker = makeAddr("attacker");
+        vm.prank(attacker);
+        vm.expectRevert();
+        mixer.withdraw(proof, publicInputs[0], publicInputs[1], payable(attacker));
+    }
+
 
     function _getCommitment() internal returns(bytes32 commitment_, bytes32 nullifier_, bytes32 secret_) {
         // inputs for the ffi call

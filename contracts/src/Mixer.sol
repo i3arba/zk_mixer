@@ -5,6 +5,18 @@ import { IncrementalMerkleTree, Poseidon2 } from "src/IncrementalMerkleTree.sol"
 
 import { IVerifier } from "src/Verifier.sol";
 
+/**
+ * @title Mixer (Educational Adaptation of Tornado Cash)
+ * @notice This smart contract is a simplified and modified version of the Tornado Cash protocol,
+ *         developed purely for educational purposes as part of a blockchain development course.
+ * @dev The original design and cryptographic structure are inspired by Tornado Cash:
+ *      https://github.com/tornadocash/tornado-core
+ *
+ * @author i3arba
+ * @custom:instructor Ciara Nightingale
+ * @notice Do not deploy this contract to mainnet or use it for handling real funds.
+ *         This contract is unaudited and intended for demonstration only.
+ */
 contract Mixer is IncrementalMerkleTree {
 
     /*/////////////////////////////////////////////////
